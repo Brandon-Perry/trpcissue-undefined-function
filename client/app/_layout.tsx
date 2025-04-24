@@ -17,6 +17,16 @@ export default function RootLayout() {
   const [loaded] = useFonts({
     SpaceMono: require('../assets/fonts/SpaceMono-Regular.ttf'),
   });
+  useEffect(()=> {
+    (async()=> {
+      try {
+        const blah = client.test.mutate()
+        console.log('got a blah, ', blah)
+      } catch(e) {
+        console.error('had an issue hitting client')
+      }
+    })()
+  },[])
 
   useEffect(() => {
     if (loaded) {
@@ -28,16 +38,6 @@ export default function RootLayout() {
     return null;
   }
 
-  useEffect(()=> {
-    (async()=> {
-      try {
-        const blah = client.test.mutate()
-        console.log('got a blah, ', blah)
-      } catch(e) {
-        console.error('had an issue hitting client')
-      }
-    })()
-  },[])
 
   return (
     <ThemeProvider value={colorScheme === 'dark' ? DarkTheme : DefaultTheme}>
